@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "../config/config.index";
 
 const NewEvent = () => {
 	const navigate = useNavigate();
@@ -13,7 +14,7 @@ const NewEvent = () => {
 	const [userId, setUserId] = useState(""); // Add userName state
 
 	const getUserId = async (token) => {
-		const response = await axios.get("http://localhost:5005/api/getUser", {
+		const response = await axios.get(`${API_URL}/api/getUser`, {
 			headers: { authorization: `Bearer ${token}` },
 		});
 		console.log("Response.data in getUserId", response.data.userId.userId);
@@ -56,7 +57,7 @@ const NewEvent = () => {
 			};
 			console.log("userId after handleSubmit: ", userId);
 
-			const response = await fetch("http://localhost:5005/api/events", {
+			const response = await fetch(`${API_URL}/api/events`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
